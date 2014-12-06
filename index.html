@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head> 
+<title>WebCoder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="keywords" content="">
+<meta name="discription" content="">
+<script></script>
+<style>
+*{padding:0;margin:0;font-size: 20px;}
+.header			{ position:fixed; width:100%; z-index: 2; top:-35px;transition: top 500ms ease; }
+.header_main	{ 
+background:url('download.png') rgba(163, 70, 70, 0.9); 
+box-shadow:0px 0px 2px 3px #571212; padding: 0 10px; position: absolute;right: 0;left: 0;  }
+.header:hover{ top:0; animation: myfirst 1s;-webkit-animation: myfirst 1s;}
+.coder{
+position:fixed;
+bottom:0;
+width:100%;
+height:200px;
+background:url("noise.png") rgba(163, 70, 70, 0.1);
+overflow:visible;
+//border-top:1px solid #A34646;
+box-shadow: 0px 0px 10px 0px #000 inset;
+transition: height 500ms ease;
+}
+.coder .cssbox, .coder .htmlbox{
+width:48%;
+width:calc(50% - 5px);
+position:relative;
+display:inline-block;
+height:100%;
+transition: width 500ms ease;
+}
+.coder .htmlbox{float:right;}
+.coder .wrap{height:100%;width:100%;position:relative;}
+.coder .resizebutton{position:absolute;right:10px;top:-23px;z-index:2;}
+
+.coder textarea{
+width:100%;height:100%;
+background:transparent;
+resize:none;
+border-color: #808080;
+padding:10px;
+font-family:consolas;
+font-size: 97%;
+text-shadow: 1px 1px 1px #FFF,-1px 0px 1px #FFF;
+}
+.logo		{ font-family: fantasy; text-decoration:none; font-size:33px; color:rgba(0, 0, 0, 0.5); font-weight:bolder; text-shadow: 2px 1px 2px #E07474; }
+.content	{ width:100%; background:whitesmoke; z-index: 0;}
+iframe		{ position:absolute;width:100%;height:calc(100% - 210px);top:5px;right:0;border:0;transition: height 500ms ease; }
+
+.controls	{ 
+float: right;
+position: relative;
+right: 20px;
+top: 13px;
+font-size:20px;
+height: 40px;
+ }
+.controls input	{display:none;}
+.controls label	{
+padding:7px 8px 6px 8px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+background:rgba(124, 38, 38, 0.6);
+margin:3px;
+transition: top 500ms ease-out;
+box-shadow:0 0 5px 2px #571212 inset;
+text-shadow: 1px 1px 2px #E07474,-1px -1px 2px #E07474;
+font-weight: bold;
+font-family: consolas;
+font-size: 90%;
+}
+.controls input:checked+label	{
+background:#571212;
+top: 34px;
+position: relative;
+border-radius: 0px 0px 10px 10px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+	<div class="header_main">
+		<a href="index.html" class="logo">WebCoder</a>
+		<div class="controls">
+			<input type="radio" name="control" id="_c1" onclick="handle(this);" value="1" />
+			<label for="_c1">
+				<span>CSS</span>
+			</label>
+			<input type="radio" name="control" id="_c2" onclick="handle(this);" value="2" />
+			<label for="_c2">
+				<span>HTML</span>
+			</label>
+			<input type="radio" name="control" id="_c3" onclick="handle(this);" value="3" checked />
+			<label for="_c3">
+				<span>HTML & CSS</span>
+			</label>
+			<input type="radio" name="control" id="_c4"  onclick="handle(this);" value="4" />
+			<label for="_c4">
+				<span>RESULT</span>
+			</label>
+		</div>
+	</div>
+</div>
+<div class="content">
+<iframe src="./webcoder.html" id="f1"></iframe>
+
+</div>
+<div class="coder" id="coder">
+	<div class="wrap">
+		<div class="cssbox" id="cssbox">
+			<textarea  id="css1" spellcheck="false">
+.logo{
+padding:20px;
+font-size:33pt;
+text-align:center; 
+color:rgba(0, 0, 0, 0.5); 
+font-weight:bolder; 
+text-shadow: 2px 1px 2px #E07474;
+background:url('download.png') rgba(163, 70, 70, 0.9); 
+box-shadow:8px 8px 8px 1px #571212;
+margin:100px auto;
+width:250px;
+}
+
+body{
+background-color:white;
+background-image: linear-gradient(90deg, rgba(142, 145, 83, 0.5) 50%, rgba(0, 0, 0, 0) 50%), 
+linear-gradient(rgba(201, 179, 67, 0.5) 50%, rgba(0, 0, 0, 0) 50%);
+background-size:50px 50px;
+}
+.chat{
+left:200px;
+position:relative;
+width:80px;
+height:20px;
+background-color:#ab00ff;
+padding:7px;
+border-radius:3px;
+box-shadow:3px 3px 4px 1px gray;
+-webkit-transform:rotate(-24deg);
+-moz-transform:rotate(-25deg);
+}
+.chat:before{ 
+content:" ";
+position:absolute;
+left:-13px;
+border-right:15px solid #ab00ff;
+border-top:10px solid transparent;
+border-bottom:10px solid transparent;
+}
+			</textarea>
+		</div>
+		<div class="htmlbox" id="htmlbox">
+			<textarea  id="html1" spellcheck="false">
+<p class="logo">WebCoder</p>
+<div class="chat">chat me!</div>
+			</textarea>
+		</div>
+	</div>
+</div>
+<script>
+
+ document.getElementById("f1").onload = function render(){
+
+document.getElementById("html1").onkeyup = function(){
+window.frames[0].document.getElementById("b1").innerHTML = document.getElementById("html1").value;
+};
+
+document.getElementById("css1").onkeyup = function(){
+window.frames[0].document.getElementById("s1").innerHTML = document.getElementById("css1").value;
+};
+
+}; 
+
+function handle(r){
+var coder = document.getElementById("coder");
+var frm = document.getElementById("f1");
+var cssdiv = document.getElementById("cssbox");
+var htmldiv = document.getElementById("htmlbox");
+if(r.value == 1){
+cssdiv.style.width = "100%";
+cssdiv.style.display = "inline-block";
+htmldiv.style.display = "none";
+frm.style.height = "calc(100% - 210px)";
+coder.style.height = "200px"; 
+return;
+}else
+if(r.value == 2){
+cssdiv.style.display = "none";
+htmldiv.style.display = "inline-block";
+htmldiv.style.width = "100%";
+frm.style.height = "calc(100% - 210px)";
+coder.style.height = "200px"; 
+return;
+}else
+if(r.value == 3){
+cssdiv.style.display = htmldiv.style.display = "inline-block";
+cssdiv.style.width = htmldiv.style.width = "calc(50% - 5px)";
+frm.style.height = "calc(100% - 210px)";
+coder.style.height = "200px"; 
+return;
+}
+if(r.value == 4){
+coder.style.height = "0px"; 
+frm.style.height = "100%";
+return;
+}
+}
+</script>
+</html>
